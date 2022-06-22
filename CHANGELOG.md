@@ -1,5 +1,23 @@
 # Changelog
 
+## \[0.11.3]
+
+- On macOS, fix native file dialogs hanging the event loop and
+  having multiple windows would prevent `run_return` from ever returning.
+  - [5c9cc21a](https://github.com/tauri-apps/tao/commit/5c9cc21a394b3d6b32c794453344263457f7d223) Fix native file dialogs freezing the event loop ([#440](https://github.com/tauri-apps/tao/pull/440)) on 2022-06-22
+- On Windows, fix wrong fullscreen monitors being recognized when handling `WM_WINDOWPOSCHANGING` messages
+  - [054a34ec](https://github.com/tauri-apps/tao/commit/054a34ec504dc98235d1fafc9b1cdede7727193e) fix: fix assigning the wrong monitor when receiving Windows move events ([#438](https://github.com/tauri-apps/tao/pull/438)) on 2022-06-22
+- Fix window can't be hidden when maximized.
+  - [cd9ad33a](https://github.com/tauri-apps/tao/commit/cd9ad33a088b3ab5dbcf3ff1681ebce323c5c61d) Fix window can't be hidden when maximized ([#384](https://github.com/tauri-apps/tao/pull/384)) on 2022-06-15
+- On macOS, `WindowEvent::Resized` is now emitted in `frameDidChange` instead of `windowDidResize`.
+  - [54062ca1](https://github.com/tauri-apps/tao/commit/54062ca1a96e3637acee771e9657ef0267933352) fix: emit resize event on frame_did_change on macOS, closes [#436](https://github.com/tauri-apps/tao/pull/436) ([#439](https://github.com/tauri-apps/tao/pull/439)) on 2022-06-22
+- Do not emit the `ThemeChanged` event when the window theme is set and the system theme changes (the window keeps its theme in this scenario).
+  - [aae6bec9](https://github.com/tauri-apps/tao/commit/aae6bec9110c19ed0b6618f08e6ce48f483bbfd0) fix(macos): do not emit ThemeChanged event if window theme didn't change ([#430](https://github.com/tauri-apps/tao/pull/430)) on 2022-06-20
+- Remvoe `core-video-sys` dependency.
+  - [3bb09aa6](https://github.com/tauri-apps/tao/commit/3bb09aa6a03c39bb78378fb85e977c37d8a47a79) fix: remove core-video-sys dependency, closes [#435](https://github.com/tauri-apps/tao/pull/435) ([#441](https://github.com/tauri-apps/tao/pull/441)) on 2022-06-22
+- The `theme` function now `Theme::Light` on macOS older than 10.14 and the initial theme setter has no effect instead of crashing the application.
+  - [ba9c5571](https://github.com/tauri-apps/tao/commit/ba9c5571f408bdca8584b1b44cc1b95a927d8e34) fix(macos): guard theme APIs to not crash when running on 10.13 or older ([#429](https://github.com/tauri-apps/tao/pull/429)) on 2022-06-20
+
 ## \[0.11.2]
 
 - Fixes the `Ivar menu_on_left_click not found on class TaoTrayHandler` panic on macOS.
